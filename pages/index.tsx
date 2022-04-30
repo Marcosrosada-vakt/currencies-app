@@ -1,15 +1,17 @@
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import Divider from '@mui/material/Divider';
+import React from 'react';
 
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
-  </Layout>
-)
+import Header from '../components/header/Header';
+import ProductsList from '../components/productsList/ProductsList';
+import SidebarCheckout from '../components/sidebarCheckout/sidebarCheckout';
 
-export default IndexPage
+export default function Home() {
+  return (
+    <>
+      <Header />
+      <Divider sx={{ mb: 5 }} />
+      <ProductsList />
+      <SidebarCheckout />
+    </>
+  );
+}

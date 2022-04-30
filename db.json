@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Peas",
+      "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
+      "price": 95,
+      "currency": "p",
+      "type": "bag"
+    },
+    {
+      "id": "2",
+      "name": "Eggs",
+      "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
+      "price": 2.10,
+      "currency": "£",
+      "type": "dozen"
+    },
+    {
+      "id": "3",
+      "name": "Milk",
+      "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
+      "price": 1.30,
+      "currency": "£",
+      "type": "bottle"
+    },
+    {
+      "id": "4",
+      "name": "Beans",
+      "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
+      "price": 73,
+      "currency": "p",
+      "type": "can"
+    }
+  ]
+}

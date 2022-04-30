@@ -1,7 +1,7 @@
-import { User } from '../interfaces'
+import { Goods } from '../interfaces'
 
-/** Dummy user data. */
-export const sampleUserData: User[] = [
+/** Dummy Goods data. */
+export const sampleGoodsData: Goods[] = [
   { id: 101, name: 'Alice' },
   { id: 102, name: 'Bob' },
   { id: 103, name: 'Caroline' },
