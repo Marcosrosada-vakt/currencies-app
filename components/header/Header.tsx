@@ -4,32 +4,44 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import AttachMoney from '@mui/icons-material/AttachMoney';
-import CurrencyPound from '@mui/icons-material/CurrencyPound';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
-import Euro from '@mui/icons-material/Euro';
 import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import Button from '@mui/material/Button';
-import { ListItemIcon, ListItemText } from '@mui/material';
+import { Badge, Select } from '@mui/material';
+
 import { useAppContext } from '../../context/app-context';
 
 
 export default function Header() {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { setSidebarCheckout } = useAppContext();
-  const [currencyList] = useState();
+  const { setSidebarOpened, checkoutList } = useAppContext();
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  console.log(checkoutList);
+  const currencies = [
+    {
+      value: 'USD',
+      label: '$',
+    },
+    {
+      value: 'EUR',
+      label: '€',
+    },
+    {
+      value: 'BTC',
+      label: '฿',
+    },
+    {
+      value: 'JPY',
+      label: '¥',
+    },
+  ];
+
+  const [currency, setCurrency] = useState('EUR');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCurrency(event.target.value);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleCart = (event: React.MouseEvent<HTMLElement>) => {
-    setSidebarCheckout(true);
+  const handleCart = () => {
+    setSidebarOpened(true);
   };
 
   return (
@@ -41,52 +53,26 @@ export default function Header() {
           </Typography>
 
           <div>
-            <Button
-              color="inherit"
-              size="small"
-              onClick={handleMenu}
-              endIcon={<CurrencyPound />}>Currency</Button>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
+            <Select
+              value={currency}
+              onChange={handleChange}
+              variant="standard"
+              sx={{ color: '#FFFFFF' }}
             >
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <AttachMoney fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primaryTypographyProps={{ fontSize: 14 }}>USD</ListItemText>
-              </MenuItem>
+              {currencies.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
 
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <Euro fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primaryTypographyProps={{ fontSize: 14 }}>EUR</ListItemText>
-              </MenuItem>
-
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <CurrencyPound fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primaryTypographyProps={{ fontSize: 14 }}>GBP</ListItemText>
-              </MenuItem>
-            </Menu>
             <IconButton
               onClick={handleCart}
               color="inherit"
             >
-              <ShoppingCart fontSize="small" />
+              <Badge badgeContent={checkoutList?.length} color="error">
+                <ShoppingCart fontSize="small" />
+              </Badge>
             </IconButton>
           </div>
         </Toolbar>

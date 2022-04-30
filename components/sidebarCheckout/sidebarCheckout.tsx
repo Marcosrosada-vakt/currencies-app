@@ -6,7 +6,7 @@ import { useAppContext } from '../../context/app-context';
 
 
 export default function SidebarCheckout() {
-  const { sidebarCheckout, setSidebarCheckout } = useAppContext();
+  const { sidebarOpened, setSidebarOpened } = useAppContext();
 
   const toggleDrawer =
     (open: boolean) =>
@@ -19,14 +19,14 @@ export default function SidebarCheckout() {
           return;
         }
 
-        setSidebarCheckout(open);
+        setSidebarOpened(open);
       };
 
   return (
     <div>
       <Drawer
         anchor="right"
-        open={sidebarCheckout}
+        open={sidebarOpened}
         onClose={toggleDrawer(false)}
       >
         <Box

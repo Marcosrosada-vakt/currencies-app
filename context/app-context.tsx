@@ -6,11 +6,14 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
+import { Product } from '../interfaces';
 
 
 interface AppContextData {
-  sidebarCheckout: boolean;
-  setSidebarCheckout: Dispatch<SetStateAction<boolean>>;
+  sidebarOpened: boolean;
+  setSidebarOpened: Dispatch<SetStateAction<boolean>>;
+  checkoutList: Product[];
+  setCheckoutList: Dispatch<SetStateAction<Product[]>>
 }
 
 export const AppContext = createContext<AppContextData>(
@@ -23,13 +26,16 @@ interface AppContextProviderProps {
 export const AppContextProvider: React.FC<AppContextProviderProps> = ({
   children,
 }) => {
-  const [sidebarCheckout, setSidebarCheckout] = useState<boolean>(false);
+  const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);
+  const [checkoutList, setCheckoutList] = useState<Product[]>([]);
 
   return (
     <AppContext.Provider
       value={{
-        sidebarCheckout,
-        setSidebarCheckout,
+        sidebarOpened,
+        setSidebarOpened,
+        checkoutList,
+        setCheckoutList,
       }}
     >
       {children}

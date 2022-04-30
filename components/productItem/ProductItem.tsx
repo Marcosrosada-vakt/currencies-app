@@ -1,62 +1,71 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import React from 'react';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
-import { Product } from '../../interfaces';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  maxHeight: '100%',
-});
+import { Product } from '../../interfaces';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import { useAppContext } from '../../context/app-context';
 
 interface ProductItemProps {
   product: Product;
 }
 
 export default function ProductItem({ product }: ProductItemProps) {
+  const { setCheckoutList, checkoutList } = useAppContext();
+
+  const handleAddItem = () => {
+    setCheckoutList([...checkoutList, product]);
+  };
+
   return (
-    <Paper
-      sx={{
-        p: 2,
-        margin: 'auto',
-        maxWidth: 400,
-        flexGrow: 1,
-      }}
-    >
-      <Grid container >
-        <Grid item>
-          <ButtonBase sx={{ width: 128, height: 128 }}>
-            <Img alt="complex" src="/static/images/grid/complex.jpg" />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" >
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" >
-                {product.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {product.description}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                Remove
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid item>
+    <Card sx={{ minWidth: 250, maxWidth: 250 }}>
+      <CardMedia
+        component="img"
+        height="120"
+        image={product.picture}
+        alt={product.name}
+      />
+      <CardContent sx={{ p: 1 }}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center">
+
+          <Typography variant="subtitle1" >
+            {product.name}
+          </Typography>
+
+          <Stack
+            direction="row"
+            justifyContent="left"
+            alignItems="center"
+            spacing={1}>
+
             <Typography variant="subtitle1" >
               {product.currency}{product.price}
             </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Paper>
+            <Typography variant="body2" color="text.secondary">
+              per {product.type}
+            </Typography>
+          </Stack>
+        </Stack>
+      </CardContent>
+
+      <CardActions disableSpacing>
+        <Button variant="outlined" size="small" startIcon={<DeleteIcon />}>
+          Delete
+        </Button>
+        <Button variant="contained" size="small" endIcon={<AddIcon />} sx={{ ml: 'auto' }} onClick={handleAddItem}>
+          Add
+        </Button>
+      </CardActions>
+
+    </Card>
   );
 }
