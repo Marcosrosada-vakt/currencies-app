@@ -12,10 +12,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import { ListItemIcon, ListItemText } from '@mui/material';
+import { useAppContext } from '../../context/app-context';
 
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { setSidebarCheckout } = useAppContext();
   const [currencyList] = useState();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -27,7 +29,7 @@ export default function Header() {
   };
 
   const handleCart = (event: React.MouseEvent<HTMLElement>) => {
-    console.log('Open Cart')
+    setSidebarCheckout(true);
   };
 
   return (

@@ -1,4 +1,18 @@
 {
+  "currencies": [
+    {
+      "name": "Pound",
+      "short": "GBR"
+    },
+    {
+      "name": "Euro",
+      "short": "EUR"
+    },
+    {
+      "name": "Dolar",
+      "short": "USD"
+    }
+  ],
   "products": [
     {
       "id": "1",

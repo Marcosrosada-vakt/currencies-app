@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import { useAppContext } from '../../context/app-context';
 
 
 export default function SidebarCheckout() {
-  const [sidebar, setSidebar] = useState<boolean>(false);
+  const { sidebarCheckout, setSidebarCheckout } = useAppContext();
 
   const toggleDrawer =
     (open: boolean) =>
@@ -19,15 +19,14 @@ export default function SidebarCheckout() {
           return;
         }
 
-        setSidebar(open);
+        setSidebarCheckout(open);
       };
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)}>Abrir</Button>
       <Drawer
         anchor="right"
-        open={sidebar}
+        open={sidebarCheckout}
         onClose={toggleDrawer(false)}
       >
         <Box
