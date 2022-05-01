@@ -76,7 +76,7 @@ export default function ProductItem({ product }: ProductItemProps) {
             spacing={1}>
 
             <Typography variant="subtitle1" >
-              {product.currency}{product.price}
+              {product.currency} {product.price}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               per {product.type}

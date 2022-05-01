@@ -5,6 +5,8 @@ import Divider from '@mui/material/Divider';
 import { useAppContext } from '../../context/app-context';
 import Typography from '@mui/material/Typography';
 import CheckoutItems from './checkoutItems/checkoutItems';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
 
 
 export default function SidebarCheckout() {
@@ -34,18 +36,18 @@ export default function SidebarCheckout() {
         <Box
           sx={{ width: 350 }}
           role="presentation"
-          onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
+
         >
           <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1, m: 1 }}>
             Checkout
+            <IconButton
+              size="small">
+              <ShoppingCart />
+            </IconButton>
           </Typography>
 
           <Divider />
-
-          <Typography variant="body2" component="div" sx={{ flexGrow: 1, m: 1 }}>
-            Products
-          </Typography>
 
           <CheckoutItems />
         </Box>
