@@ -20,6 +20,7 @@
       "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
       "picture": "https://images.unsplash.com/photo-1567306301408-9b74779a11af?fit=crop&auto=format",
       "price": 95,
+      "quantity": 0,
       "currency": "p",
       "type": "bag"
     },
@@ -29,6 +30,7 @@
       "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
       "picture": "https://images.unsplash.com/photo-1567306301408-9b74779a11af?fit=crop&auto=format",
       "price": 2.10,
+      "quantity": 0,
       "currency": "£",
       "type": "dozen"
     },
@@ -38,6 +40,7 @@
       "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
       "picture": "https://images.unsplash.com/photo-1567306301408-9b74779a11af?fit=crop&auto=format",
       "price": 1.30,
+      "quantity": 0,
       "currency": "£",
       "type": "bottle"
     },
@@ -47,6 +50,7 @@
       "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
       "picture": "https://images.unsplash.com/photo-1567306301408-9b74779a11af?fit=crop&auto=format",
       "price": 73,
+      "quantity": 0,
       "currency": "p",
       "type": "can"
     }

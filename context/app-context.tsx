@@ -26,7 +26,7 @@ interface AppContextProviderProps {
 export const AppContextProvider: React.FC<AppContextProviderProps> = ({
   children,
 }) => {
-  const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);
+  const [sidebarOpened, setSidebarOpened] = useState<boolean>(true);
   const [checkoutList, setCheckoutList] = useState<Product[]>([]);
 
   return (

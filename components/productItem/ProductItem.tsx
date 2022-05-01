@@ -1,26 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-
-import { Product } from '../../interfaces';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { useAppContext } from '../../context/app-context';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
+import { useAppContext } from '../../context/app-context';
+import { Product } from '../../interfaces';
 interface ProductItemProps {
   product: Product;
 }
 
 export default function ProductItem({ product }: ProductItemProps) {
   const { setCheckoutList, checkoutList } = useAppContext();
+  const [quantity, setQuantity] = useState<number>(0);
+  const quantitiesList = [0, 1, 2, 3, 4, 5];
+
+  const handleQuantityChange = ({ target: { value } }: SelectChangeEvent) => {
+    if (!value) {
+      const checklistFiltered = checkoutList.filter((item) => item.id !== product.id);
+
+      setCheckoutList(checklistFiltered);
+    }
+
+    setQuantity(parseInt(value));
+  };
 
   const handleAddItem = () => {
-    setCheckoutList([...checkoutList, product]);
+    const matchItem = checkoutList.find((item) => item.id === product.id);
+
+    if (matchItem) {
+      const checklistUpdated = checkoutList.map((item) => {
+        if (item.id === product.id) {
+          item.quantity += quantity;
+          return item;
+        }
+
+        return item;
+      });
+      setCheckoutList([...checklistUpdated]);
+      return;
+    }
+
+    setCheckoutList([...checkoutList, { ...product, quantity: quantity }]);
   };
 
   return (
@@ -57,13 +85,33 @@ export default function ProductItem({ product }: ProductItemProps) {
         </Stack>
       </CardContent>
 
-      <CardActions disableSpacing>
-        <Button variant="outlined" size="small" startIcon={<DeleteIcon />}>
-          Delete
-        </Button>
-        <Button variant="contained" size="small" endIcon={<AddIcon />} sx={{ ml: 'auto' }} onClick={handleAddItem}>
-          Add
-        </Button>
+      <CardActions>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={1}>
+
+            <Select
+              value={quantity.toString()}
+              onChange={handleQuantityChange}
+              sx={{ width: 140, height: 32 }}
+            >
+              {quantitiesList.map((quantity) => (
+                <MenuItem key={quantity} value={quantity}>{quantity}</MenuItem>
+              ))}
+            </Select>
+            <Button
+              variant="contained"
+              size="small"
+              endIcon={<ShoppingCart />}
+              onClick={handleAddItem}
+              disabled={!quantity}>
+              Add
+            </Button>
+          </Stack>
+        </FormControl>
       </CardActions>
 
     </Card>
