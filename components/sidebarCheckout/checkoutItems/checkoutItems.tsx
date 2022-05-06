@@ -18,11 +18,16 @@ import Paper from '@mui/material/Paper';
 export default function CheckoutItems() {
   const { checkoutList, setCheckoutList } = useAppContext();
   const [quantitiesList] = useState<number[]>([0, 1, 2, 3, 4, 5, 7, 8, 9, 10]);
+  console.log(checkoutList);
 
   const handleQuantityChange = (product: Product, { target: { value } }: SelectChangeEvent) => {
     const checkoutUpdate = checkoutList.map((item) => {
       if (item.id === product.id) {
-        return { ...item, quantity: parseInt(value) };
+        return {
+          ...item,
+          quantity: parseInt(value),
+          total: product.price * parseInt(value)
+        };
       }
 
       return item;
@@ -75,7 +80,7 @@ export default function CheckoutItems() {
                   spacing={1}>
 
                   <Typography variant="subtitle1" >
-                    {item.currency} {item.price * item.quantity}
+                    {item.currency} {item.total}
                   </Typography>
                 </Stack>
               </Stack>

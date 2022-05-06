@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import CheckoutItems from './checkoutItems/checkoutItems';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
+import CheckoutSummary from './checkoutSummary/checkoutSummary';
 
 
 export default function SidebarCheckout() {
@@ -50,6 +51,7 @@ export default function SidebarCheckout() {
           <Divider />
 
           <CheckoutItems />
+          <CheckoutSummary />
         </Box>
       </Drawer>
     </div>

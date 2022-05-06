@@ -1,27 +1,14 @@
 {
-  "currencies": [
-    {
-      "name": "Pound",
-      "short": "GBR"
-    },
-    {
-      "name": "Euro",
-      "short": "EUR"
-    },
-    {
-      "name": "Dolar",
-      "short": "USD"
-    }
-  ],
   "products": [
     {
       "id": "1",
       "name": "Peas",
       "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
       "picture": "https://images.unsplash.com/photo-1567306301408-9b74779a11af?fit=crop&auto=format",
-      "price": 95,
+      "price": 0.95,
       "quantity": 0,
-      "currency": "p",
+      "total": 0,
+      "currency": "$",
       "type": "bag"
     },
     {
@@ -31,7 +18,8 @@
       "picture": "https://images.unsplash.com/photo-1567306301408-9b74779a11af?fit=crop&auto=format",
       "price": 2.10,
       "quantity": 0,
-      "currency": "£",
+      "total": 0,
+      "currency": "$",
       "type": "dozen"
     },
     {
@@ -41,7 +29,8 @@
       "picture": "https://images.unsplash.com/photo-1567306301408-9b74779a11af?fit=crop&auto=format",
       "price": 1.30,
       "quantity": 0,
-      "currency": "£",
+      "total": 0,
+      "currency": "$",
       "type": "bottle"
     },
     {
@@ -49,9 +38,10 @@
       "name": "Beans",
       "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
       "picture": "https://images.unsplash.com/photo-1567306301408-9b74779a11af?fit=crop&auto=format",
-      "price": 73,
+      "price": 0.73,
       "quantity": 0,
-      "currency": "p",
+      "total": 0,
+      "currency": "$",
       "type": "can"
     }
   ]

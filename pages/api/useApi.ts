@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-export const useApi = () => {
-  const baseURL = 'http://localhost:3001';
+export const useApi = (baseURL: string) => {
 
   return axios.create({ baseURL: baseURL });
 };

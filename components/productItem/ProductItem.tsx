@@ -39,6 +39,7 @@ export default function ProductItem({ product }: ProductItemProps) {
       const checklistUpdated = checkoutList.map((item) => {
         if (item.id === product.id) {
           item.quantity += quantity;
+          item.total = item.price * item.quantity;
           return item;
         }
 
@@ -48,7 +49,7 @@ export default function ProductItem({ product }: ProductItemProps) {
       return;
     }
 
-    setCheckoutList([...checkoutList, { ...product, quantity: quantity }]);
+    setCheckoutList([...checkoutList, { ...product, quantity: quantity, total: product.price * quantity }]);
   };
 
   return (
