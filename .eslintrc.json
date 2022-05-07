@@ -18,7 +18,8 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "react-hooks"
     ],
     "rules": {
         "quotes": [
@@ -28,6 +29,29 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "react/jsx-uses-vars": 1,
+        "react/react-in-jsx-scope": 1,
+        "react/prop-types": 0, // no use of prop-types for TS projects
+        "no-plusplus": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "no-debugger": "error",
+        "no-console": "error",
+        "no-unused-vars": "off",
+        "no-undef": "off", // TS already checks for no defined variables
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "varsIgnorePattern": "^_$"
+            }
+        ],
+        "@typescript-eslint/no-explicit-any": [
+            "error",
+            {
+                "ignoreRestArgs": true
+            }
+        ],
+        "@typescript-eslint/explicit-function-return-type": "off"
     }
 }

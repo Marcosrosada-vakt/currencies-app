@@ -13,14 +13,12 @@ import { Currency, Exchange } from '../../../interfaces';
 export default function CheckoutSummary() {
   const { checkoutList } = useAppContext();
   const { data: currenciesAPI, isFetching } = useFetch<Currency>('http://apilayer.net/api/live?access_key=ad30c625b3f869131ea1d1b785db15fc&currencies=EUR,GBP,CAD,PLN&source=USD&format=1');
-  const [exchange, setExchange] = useState<Exchange>({} as Exchange);
+  const [exchange, setExchange] = useState<Exchange>({ currency: '', exchange: 1 });
   const [exchangesList, setExchangesList] = useState<Exchange[]>([]);
   const [total, settotal] = useState<number>(0);
 
   useEffect(() => {
     if (!isFetching) {
-      setExchange({ currency: currenciesAPI.source, exchange: 1 });
-
       const currenciesQuotes = Object.keys(currenciesAPI.quotes).map((currency) => {
         return {
           currency: currency.substring(3, 6),
@@ -28,10 +26,12 @@ export default function CheckoutSummary() {
         };
       });
 
-      setExchangesList([exchange, ...currenciesQuotes]);
-      console.log({ exchange, currenciesAPI });
+      const sourceExchange = { currency: currenciesAPI.source, exchange: 1 };
+
+      setExchange(sourceExchange);
+      setExchangesList([{ ...sourceExchange }, ...currenciesQuotes]);
     }
-  }, [currenciesAPI, isFetching, setExchange]);
+  }, [currenciesAPI, isFetching]);
 
   useEffect(() => {
     const total = checkoutList.reduce<number>((acc, item) => {
@@ -40,7 +40,7 @@ export default function CheckoutSummary() {
 
     settotal(total * exchange.exchange);
 
-  }, [checkoutList, exchange, total]);
+  }, [checkoutList, exchange]);
 
   const handleExchangeChange = ({ target: { value } }: SelectChangeEvent) => {
     const exchange = exchangesList.find((exchange) => exchange.currency === value);

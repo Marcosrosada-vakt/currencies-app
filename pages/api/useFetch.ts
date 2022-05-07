@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import useApi from './useApi';
 
@@ -9,7 +10,7 @@ export function useFetch<T = unknown>(path: string, baseUrl = 'http://localhost:
 
   useEffect(() => {
     httpClient.get(path)
-      .then((response: any) => {
+      .then((response: AxiosResponse) => {
         setData(response.data);
       })
       .catch((err) => {

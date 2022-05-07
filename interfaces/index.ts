@@ -12,7 +12,7 @@ export type Product = {
 
 export type Currency = {
   privacy: string;
-  quotes: any[]; //Record<string, number>;
+  quotes: unknown[]; //Record<string, number>;
   source: string;
   success: boolean;
   terms: string;

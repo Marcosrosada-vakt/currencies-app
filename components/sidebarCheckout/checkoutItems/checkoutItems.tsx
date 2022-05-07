@@ -18,7 +18,6 @@ import Paper from '@mui/material/Paper';
 export default function CheckoutItems() {
   const { checkoutList, setCheckoutList } = useAppContext();
   const [quantitiesList] = useState<number[]>([0, 1, 2, 3, 4, 5, 7, 8, 9, 10]);
-  console.log(checkoutList);
 
   const handleQuantityChange = (product: Product, { target: { value } }: SelectChangeEvent) => {
     const checkoutUpdate = checkoutList.map((item) => {

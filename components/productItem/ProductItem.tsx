@@ -20,7 +20,7 @@ interface ProductItemProps {
 export default function ProductItem({ product }: ProductItemProps) {
   const { setCheckoutList, checkoutList } = useAppContext();
   const [quantity, setQuantity] = useState<number>(0);
-  const quantitiesList = [0, 1, 2, 3, 4, 5];
+  const quantitiesList = Array.from(Array(6).keys());
 
   const handleQuantityChange = ({ target: { value } }: SelectChangeEvent) => {
     if (!value) {
