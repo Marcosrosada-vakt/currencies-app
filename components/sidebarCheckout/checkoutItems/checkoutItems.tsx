@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -11,9 +12,10 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+
 import { useAppContext } from '../../../context/app-context';
 import { Product } from '../../../interfaces';
-import Paper from '@mui/material/Paper';
+import { handleTotalItemPrice } from '../../../utils/utils';
 
 export default function CheckoutItems() {
   const { checkoutList, setCheckoutList } = useAppContext();
@@ -25,10 +27,11 @@ export default function CheckoutItems() {
         return {
           ...item,
           quantity: parseInt(value),
-          total: product.price * parseInt(value)
+          total: handleTotalItemPrice(product.price, parseInt(value))
         };
       }
 
+      console.log(item.total)
       return item;
     });
 
@@ -40,18 +43,6 @@ export default function CheckoutItems() {
 
     setCheckoutList(checklistFiltered);
   };
-
-  if (checkoutList.length === 0) {
-    return (
-      <Paper
-        sx={{ display: 'flex', justifyContent: 'center', m: 5, p: 2, }}
-        elevation={2}>
-        <Typography variant="subtitle1" >
-          Cart is empty
-        </Typography>
-      </Paper>
-    );
-  }
 
   return (
     <List sx={{ width: '100%' }}>
@@ -72,16 +63,9 @@ export default function CheckoutItems() {
                   {item.name}
                 </Typography>
 
-                <Stack
-                  direction="row"
-                  justifyContent="left"
-                  alignItems="center"
-                  spacing={1}>
-
-                  <Typography variant="subtitle1" >
-                    {item.currency} {item.total}
-                  </Typography>
-                </Stack>
+                <Typography variant="subtitle1" >
+                  {item.currency} {item.total}
+                </Typography>
               </Stack>
 
               <FormControl sx={{ m: 1 }} size="small">

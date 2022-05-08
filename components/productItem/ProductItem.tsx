@@ -10,9 +10,20 @@ import FormControl from '@mui/material/FormControl';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 import { useAppContext } from '../../context/app-context';
 import { Product } from '../../interfaces';
+import { handleTotalItemPrice } from '../../utils/utils';
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref,
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} sx={{ mt: 6 }} />;
+});
+
 interface ProductItemProps {
   product: Product;
 }
@@ -21,6 +32,7 @@ export default function ProductItem({ product }: ProductItemProps) {
   const { setCheckoutList, checkoutList } = useAppContext();
   const [quantity, setQuantity] = useState<number>(0);
   const quantitiesList = Array.from(Array(6).keys());
+  const [open, setOpen] = useState(false);
 
   const handleQuantityChange = ({ target: { value } }: SelectChangeEvent) => {
     if (!value) {
@@ -33,27 +45,54 @@ export default function ProductItem({ product }: ProductItemProps) {
   };
 
   const handleAddItem = () => {
+    setOpen(true);
+
     const matchItem = checkoutList.find((item) => item.id === product.id);
 
     if (matchItem) {
       const checklistUpdated = checkoutList.map((item) => {
         if (item.id === product.id) {
           item.quantity += quantity;
-          item.total = item.price * item.quantity;
+          item.total = handleTotalItemPrice(item.price, item.quantity);
           return item;
         }
 
         return item;
       });
+
       setCheckoutList([...checklistUpdated]);
       return;
     }
 
-    setCheckoutList([...checkoutList, { ...product, quantity: quantity, total: product.price * quantity }]);
+    setCheckoutList([
+      ...checkoutList,
+      {
+        ...product,
+        quantity: quantity,
+        total: handleTotalItemPrice(product.price, quantity)
+      }
+    ]);
   };
+
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
 
   return (
     <Card sx={{ minWidth: 250, maxWidth: 250 }}>
+      <Snackbar
+        open={open}
+        autoHideDuration={1000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Item added!
+        </Alert>
+      </Snackbar>
       <CardMedia
         component="img"
         height="120"
@@ -114,7 +153,6 @@ export default function ProductItem({ product }: ProductItemProps) {
           </Stack>
         </FormControl>
       </CardActions>
-
     </Card>
   );
 }

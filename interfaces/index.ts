@@ -5,7 +5,7 @@ export type Product = {
   picture: string;
   price: number;
   quantity: number;
-  total: number;
+  total: string;
   currency: string;
   type: string;
 }

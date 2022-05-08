@@ -8,10 +8,11 @@ import CheckoutItems from './checkoutItems/checkoutItems';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import CheckoutSummary from './checkoutSummary/checkoutSummary';
+import Paper from '@mui/material/Paper';
 
 
 export default function SidebarCheckout() {
-  const { sidebarOpened, setSidebarOpened } = useAppContext();
+  const { sidebarOpened, setSidebarOpened, checkoutList } = useAppContext();
 
   const toggleDrawer =
     (open: boolean) =>
@@ -41,7 +42,7 @@ export default function SidebarCheckout() {
 
         >
           <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1, m: 1 }}>
-            Checkout
+            Cart
             <IconButton
               size="small">
               <ShoppingCart />
@@ -50,8 +51,23 @@ export default function SidebarCheckout() {
 
           <Divider />
 
-          <CheckoutItems />
-          <CheckoutSummary />
+          {checkoutList.length === 0 ?
+            (
+              <Paper
+                sx={{ display: 'flex', justifyContent: 'center', m: 5, p: 2, }}
+                elevation={2}>
+                <Typography variant="subtitle1" >
+                  Cart is empty
+                </Typography>
+              </Paper>
+            ) :
+            (
+              <>
+                <CheckoutItems />
+                <CheckoutSummary />
+              </>
+            )
+          }
         </Box>
       </Drawer>
     </div>
