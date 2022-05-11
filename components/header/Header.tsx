@@ -14,6 +14,10 @@ export default function Header() {
   const [counterItems, setCounterItems] = useState<number | null>(null);
 
   useEffect(() => {
+    if (!checkoutList) {
+      return;
+    }
+
     const totalItems = checkoutList.reduce<number>((acc, item) => {
       return acc + item.quantity;
     }, 0);
@@ -38,9 +42,15 @@ export default function Header() {
               onClick={handleCart}
               color="inherit"
             >
-              <Badge badgeContent={counterItems} color="error">
-                <ShoppingCart fontSize="small" />
-              </Badge>
+              {counterItems ?
+                (
+                  <Badge data-testid="counter-items" badgeContent={counterItems} color="error">
+                    <ShoppingCart fontSize="small" />
+                  </Badge>
+                ) :
+                (
+                  <ShoppingCart fontSize="small" />
+                )}
             </IconButton>
           </div>
         </Toolbar>

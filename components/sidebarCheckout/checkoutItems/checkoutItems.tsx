@@ -31,7 +31,6 @@ export default function CheckoutItems() {
         };
       }
 
-      console.log(item.total)
       return item;
     });
 

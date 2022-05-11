@@ -19,6 +19,7 @@ export function useFetch<T = unknown>(path: string, baseUrl = 'http://localhost:
       .finally(() => {
         setIsFetching(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { data, error, isFetching };

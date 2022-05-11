@@ -35,12 +35,6 @@ export default function ProductItem({ product }: ProductItemProps) {
   const [open, setOpen] = useState(false);
 
   const handleQuantityChange = ({ target: { value } }: SelectChangeEvent) => {
-    if (!value) {
-      const checklistFiltered = checkoutList.filter((item) => item.id !== product.id);
-
-      setCheckoutList(checklistFiltered);
-    }
-
     setQuantity(parseInt(value));
   };
 
@@ -134,6 +128,7 @@ export default function ProductItem({ product }: ProductItemProps) {
             spacing={1}>
 
             <Select
+              data-testid="select-quantity"
               value={quantity.toString()}
               onChange={handleQuantityChange}
               sx={{ width: 140, height: 32 }}
@@ -143,6 +138,7 @@ export default function ProductItem({ product }: ProductItemProps) {
               ))}
             </Select>
             <Button
+              data-testid="button-add-item"
               variant="contained"
               size="small"
               endIcon={<ShoppingCart />}
